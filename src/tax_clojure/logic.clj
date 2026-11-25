@@ -35,5 +35,17 @@
     salario
     (calcular-imposto-retido taxa-padrao salario)))
 
+(defn -consulta-taxa-padrao-fixa  []
+   0.10)
 
-(imposto-retido consulta-taxa 5000  )
+(defn -minha-taxa-padrao [_]
+  (-consulta-taxa-padrao-fixa))
+
+(defn escolhe-taxa-padrao [ambiente]
+  (if (= ambiente :teste)
+    -minha-taxa-padrao
+    consulta-taxa
+    ))
+
+
+(imposto-retido (escolhe-taxa-padrao :producao) 13000)
