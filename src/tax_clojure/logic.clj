@@ -26,11 +26,14 @@
 (defn- arredondar-centavos [valor]
   (/ (double (Math/round (* valor 100))) 100))
 
-(defn- calcular-imposto-retido [salario taxa-padrao]
+(defn- calcular-imposto-retido [taxa-padrao salario]
   (let [valor (* salario (/ (taxa-padrao salario) 100))]
     (arredondar-centavos valor)))
 
-(defn imposto-retido [salario taxa-padrao]
+(defn imposto-retido [taxa-padrao salario]
   (if (isento? salario)
     salario
-    (calcular-imposto-retido salario taxa-padrao)))
+    (calcular-imposto-retido taxa-padrao salario)))
+
+
+(imposto-retido consulta-taxa 5000  )
